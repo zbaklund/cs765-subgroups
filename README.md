@@ -1,1 +1,24 @@
-# cs765-subgroups
+# CS765-subgroups
+- Zachary Baklund
+- Brandon Tran
+
+## Dependencies
+- HTML / CSS / Javascript (Web)
+- [D3.js](https://github.com/d3/d3) 
+- [Node.js](https://nodejs.org/en/) 
+(*optionally* used for local development)
+- [http-server (npm)](https://www.npmjs.com/package/http-server)
+
+## How to deploy and debug locally
+Install http-server
+`npm install --global http-server`
+
+Navigate to code directory containing the index.html file.
+Run
+`http-server -c-1`
+
+Then when serving the static webpage locally navigate to localhost
+`http://127.0.0.1:8080/index.html`
+
+From there anytime you update the html file or the script file the changes will update on the local copy after saving and making sure to disable cach on the localhost
+
