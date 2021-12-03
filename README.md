@@ -13,7 +13,7 @@
 Install http-server
 `npm install --global http-server`
 
-Navigate to code directory containing the index.html file.
+Navigate to code directory containing the index.html file.\
 Run `http-server -c-1`
 
 Then when serving the static webpage locally navigate to localhost
