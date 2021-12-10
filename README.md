@@ -8,6 +8,8 @@
 - [Node.js](https://nodejs.org/en/) 
 (*optionally* used for local development)
 - [http-server (npm)](https://www.npmjs.com/package/http-server)
+- [git-lfs](https://git-lfs.github.com/)
+(used for large file tracking)
 
 ## How to deploy and debug locally
 Install http-server
