@@ -2,21 +2,7 @@ d3.select('h1').style('color', 'red')
 .attr('class', 'heading')
 .text('Updated h1 via D3');
 
-d3.select("#interactive").append('p').text('First Paragraph');
-d3.select("#interactive").append('p').text('Second Paragraph');
-d3.select("#interactive").append('p').text('Third Paragraph');
-
 d3.selectAll('p').style('color', 'blue');
-
-var dataset = [1,2,3,4,5];
-
-d3.select('#interactive')
-    .selectAll('p')
-    .data(dataset)
-    .enter()
-    .append('p')
-    //.text('D3 append');
-    .text(function(d) {return d; });
 
 var dataset = [80, 100, 56, 120, 180, 30, 40, 120, 160];
 

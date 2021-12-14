@@ -29,13 +29,13 @@
 <body>
   <script src="https://d3js.org/d3.v7.min.js"></script>
 
-  <div id="main" class="container-fluid Vh-100 px-0">
+  <div id="main" class="container-fluid Vh-100">
     <nav class="navbar navbar-dark" style="background-color: #c5050c;">
-      <a class="navbar-brand" href="#">CS 765 DC2</a>
+      <a class="navbar-brand" style="padding-left: 1em;" href="#">CS 765 DC2</a>
     </nav>
 
     <div class="row">
-      <div id="interactive" class="col-lg-4 col-md-6 p-l-2">
+      <div id="interactive" class="col-lg-4 col-md-6" style="padding-left: 1em;">
         <h1>cs765-subgroups</h1>
         <ul></ul>
         <button type="button">Click Me!</button>
@@ -54,6 +54,18 @@
         <div id="dimensions-selected">
 
         </div>
+
+        <div id="threshold-range">
+          This is where they select the threshold
+          <div>
+            <input type="range" id="threshold" name="threshold" min="1" max="100" value="25"
+            oninput="amount.value=threshold.value">                                                       
+     
+            <output id="amount" name="amount" for="threshold">0</output>  
+          </div>
+        </div>
+
+
       </div>
       <script src="js/interactive.js"></script>
 
