@@ -1,9 +1,3 @@
-d3.select('h1').style('color', 'red')
-.attr('class', 'heading')
-.text('Updated h1 via D3');
-
-d3.selectAll('p').style('color', 'blue');
-
 var dataset = [80, 100, 56, 120, 180, 30, 40, 120, 160];
 
 var svgWidth = 500, svgHeight = 300, barPadding = 5;
