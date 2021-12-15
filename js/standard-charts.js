@@ -2,7 +2,6 @@
 // var chartType = 0
 // createHistogram()
 
-
 d3.select('#chart-button')
 .on('click', function () {
     var order_vals = []
@@ -38,6 +37,8 @@ d3.select('#chart-button')
         console.log(data_objs);
         const svg = d3.select("#standard-chart");
 
+        color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, data_objs.length + 1));
+
         var margin = {top: 20, right: 20, bottom: 100, left: 40},
             width = +svg.attr("width") - margin.left - margin.right,
             height = +svg.attr("height") - margin.bottom;
@@ -67,7 +68,7 @@ d3.select('#chart-button')
         g.selectAll(".bar")
             .data(data_objs)
             .enter().append("rect")
-            .style("fill", "#c5050c")
+            .style("fill", d => color(d.value))
             .attr("class", "bar")
             .attr("x", d => x(d.name))
             .attr("y", d => y(d.value))
