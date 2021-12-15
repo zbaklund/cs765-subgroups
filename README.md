@@ -23,6 +23,9 @@ Then when serving the static webpage locally navigate to localhost
 
 From there anytime you update the html file or the script file the changes will update on the local copy after saving and making sure to disable cach on the localhost
 
+## Live Site
+
+https://zbaklund.github.io/cs765-subgroups/
 
 ## Data Visualization Interactive Demo
 
