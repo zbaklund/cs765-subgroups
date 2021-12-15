@@ -3,7 +3,7 @@
 // createHistogram()
 
 
-d3.select('button')
+d3.select('#chart-button')
 .on('click', function () {
     var order_vals = []
 
