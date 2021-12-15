@@ -58,7 +58,7 @@
         <div id="threshold-range" class="mt-2">
           This is where they select the threshold
           <div>
-            <input type="range" id="threshold" name="threshold" min="0" max="500000" value="100000"
+            <input type="range" id="threshold" name="threshold" min="0" max="500000" value="100000" step="10000"
               oninput="amount.value=threshold.value">
 
             <output id="amount" name="amount" for="threshold">100000</output>
@@ -81,7 +81,7 @@
 
       <div id="standard-charts" class="col-md-5">
         <button type="button" id="chart-button" class="mt-2">Click Me To Generate Standard Chart!</button>
-        <svg id="standard-chart" width="500" height="500"></svg>
+        <!-- <svg id="standard-chart" width="500" height="500"></svg> -->
 
       </div>
 

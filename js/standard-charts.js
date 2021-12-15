@@ -20,27 +20,35 @@ d3.select('#chart-button')
     d3.json("https://zbaklund.github.io/cs765-subgroups/datasets/flare-2.json").then(function(data){
         // console.log(data)
 
-        var explore = data.children;
-        var sub_explore = [];
-        var data_objs = [];
-        explore.forEach(element => {
-            if (element.name == order_vals[0]){
-                sub_explore = element.children;
-                sub_explore.forEach(ele => {
-                    if (ele.name == order_vals[1]){
-                        data_objs = ele.children;
-                    }
-                });
-            }
-        });
+        // var explore = data.children;
+        // var sub_explore = [];
+        // var data_objs = [];
+        // explore.forEach(element => {
+        //     if (element.name == order_vals[0]){
+        //         sub_explore = element.children;
+        //         sub_explore.forEach(ele => {
+        //             if (ele.name == order_vals[1]){
+        //                 data_objs = ele.children;
+        //             }
+        //         });
+        //     }
+        // });
+        data_objs = search_tree(data, order_vals[order_vals.length - 1]);
 
-        // console.log(data_objs);
+        console.log(data_objs);
 
         data_objs = fix_sub_sums(data_objs);
 
         console.log(data_objs);
 
-        const svg = d3.select("#standard-chart");
+        if(d3.select("#new_chart").size() != 0){
+            d3.select("#new_chart").remove();
+        }
+        const svg = d3.select("#standard-charts")
+            .append("svg")
+            .attr("id", "new_chart")
+            .attr("width", 500)
+            .attr("height", 500);
 
         color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, data_objs.length + 1));
 
@@ -82,19 +90,21 @@ d3.select('#chart-button')
             .append("svg:title")
             .text(function(d) { return `${d.name} : ${d.value}`})
     });
-    // d3.select('#standard-chart').selectAll('*').remove();
-    // if(chartType == 0){
-    //     console.log("I want to create a heatmap")
-    //     createHeatMap()
-    //     chartType = 1
-    // }
-    // else{
-    //     console.log("I want to create a histogram")
-    //     createHistogram()
-    //     chartType = 0
-    // }
-
 });
+
+function search_tree(element, match){
+    if(element.name == match){
+        return element.children;
+    }else if (element.hasOwnProperty("children")){
+        var i;
+        var result = null;
+        for(i = 0; result == null && i < element.children.length; i++){
+            result = search_tree(element.children[i], match);
+        }
+        return result;
+    }
+    return null;
+}
 
 function fix_sub_sums(data_objs){
     data_objs.forEach(element => {
