@@ -34,7 +34,12 @@ d3.select('#chart-button')
             }
         });
 
+        // console.log(data_objs);
+
+        data_objs = fix_sub_sums(data_objs);
+
         console.log(data_objs);
+
         const svg = d3.select("#standard-chart");
 
         color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, data_objs.length + 1));
@@ -90,6 +95,33 @@ d3.select('#chart-button')
     // }
 
 });
+
+function fix_sub_sums(data_objs){
+    data_objs.forEach(element => {
+        if(element.hasOwnProperty('children')){
+            console.log(element.name)
+            element.value = sum_subs(element)
+        }
+    });
+
+    return data_objs
+}
+
+function sum_subs(parent_obj){
+    sum = 0;
+
+    if(parent_obj.hasOwnProperty('children')){
+        parent_obj.children.forEach(child => {
+            if(child.hasOwnProperty('value')){
+                sum += child.value;
+            }else {
+                sum += sum_subs(child)
+            }
+        });
+    }
+    
+    return sum;
+}
 
 function createHistogram(){
     var dataset = [80, 100, 56, 120, 180, 30, 40, 120, 160];
