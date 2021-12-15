@@ -38,7 +38,7 @@ d3.select('#chart-button')
         console.log(data_objs);
         const svg = d3.select("#standard-chart");
 
-        var margin = {top: 20, right: 20, bottom: 30, left: 40},
+        var margin = {top: 20, right: 20, bottom: 100, left: 40},
             width = +svg.attr("width") - margin.left - margin.right,
             height = +svg.attr("height") - margin.bottom;
 
@@ -54,6 +54,11 @@ d3.select('#chart-button')
             .attr("class", "axis axis-x")
             .attr("transform", `translate(0,${height})`)
             .call(d3.axisBottom(x))
+            .selectAll("text")
+            .attr("y", 0)
+            .attr("x", 9)
+            .attr("transform", "rotate(90)")
+            .style("text-anchor", "start");
 
         g.append("g")
             .attr("class", "axis axis-y")
@@ -62,11 +67,14 @@ d3.select('#chart-button')
         g.selectAll(".bar")
             .data(data_objs)
             .enter().append("rect")
+            .style("fill", "#c5050c")
             .attr("class", "bar")
             .attr("x", d => x(d.name))
             .attr("y", d => y(d.value))
             .attr("width", x.bandwidth())
-            .attr("height", d => height - y(d.value));
+            .attr("height", d => height - y(d.value))
+            .append("svg:title")
+            .text(function(d) { return `${d.name} : ${d.value}`})
     });
     // d3.select('#standard-chart').selectAll('*').remove();
     // if(chartType == 0){
