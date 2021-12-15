@@ -23,3 +23,7 @@ Then when serving the static webpage locally navigate to localhost
 
 From there anytime you update the html file or the script file the changes will update on the local copy after saving and making sure to disable cach on the localhost
 
+
+
+https://user-images.githubusercontent.com/22531969/146138393-8e34712c-e3a4-4241-ac8f-c8d16c6e0e12.mp4
+
