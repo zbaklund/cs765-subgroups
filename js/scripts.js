@@ -1,5 +1,5 @@
 // var data = []
-d3.json("../datasets/flare-2.json").then(function(data){
+d3.json("https://zbaklund.github.io/cs765-subgroups/datasets/flare-2.json").then(function(data){
     console.log(data)
 
     color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, data.children.length + 1));

@@ -18,7 +18,7 @@ d3.select('#chart-button')
     
     console.log(order_vals)
 
-    d3.json("../datasets/flare-2.json").then(function(data){
+    d3.json("https://zbaklund.github.io/cs765-subgroups/datasets/flare-2.json").then(function(data){
         // console.log(data)
 
         var explore = data.children;
