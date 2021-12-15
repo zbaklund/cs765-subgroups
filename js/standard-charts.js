@@ -1,21 +1,85 @@
 
-var chartType = 0
-createHistogram()
+// var chartType = 0
+// createHistogram()
 
 
 d3.select('button')
 .on('click', function () {
-    d3.select('#standard-chart').selectAll('*').remove();
-    if(chartType == 0){
-        console.log("I want to create a heatmap")
-        createHeatMap()
-        chartType = 1
-    }
-    else{
-        console.log("I want to create a histogram")
-        createHistogram()
-        chartType = 0
-    }
+    var order_vals = []
+
+    var values = d3.select("#trail")
+        .selectAll("li")
+    values.each(function (p,j) {
+        // console.log("p: " + p, "j: " + j)
+        var this_text = d3.select(this).text();
+        // console.log(this_text)
+        order_vals.push(this_text)
+    });  
+    
+    console.log(order_vals)
+
+    d3.json("../datasets/flare-2.json").then(function(data){
+        // console.log(data)
+
+        var explore = data.children;
+        var sub_explore = [];
+        var data_objs = [];
+        explore.forEach(element => {
+            if (element.name == order_vals[0]){
+                sub_explore = element.children;
+                sub_explore.forEach(ele => {
+                    if (ele.name == order_vals[1]){
+                        data_objs = ele.children;
+                    }
+                });
+            }
+        });
+
+        console.log(data_objs);
+        const svg = d3.select("#standard-chart");
+
+        var margin = {top: 20, right: 20, bottom: 30, left: 40},
+            width = +svg.attr("width") - margin.left - margin.right,
+            height = +svg.attr("height") - margin.bottom;
+
+        var x = d3.scaleBand().rangeRound([0,width]).padding(0.2);
+        var y = d3.scaleLinear().rangeRound([height,0]);
+        g = svg.append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+        
+        x.domain(data_objs.map(d => d.name));
+        y.domain([0, d3.max(data_objs, d => d.value)]);
+
+        g.append("g")
+            .attr("class", "axis axis-x")
+            .attr("transform", `translate(0,${height})`)
+            .call(d3.axisBottom(x))
+
+        g.append("g")
+            .attr("class", "axis axis-y")
+            .call(d3.axisLeft(y).ticks(10));
+
+        g.selectAll(".bar")
+            .data(data_objs)
+            .enter().append("rect")
+            .attr("class", "bar")
+            .attr("x", d => x(d.name))
+            .attr("y", d => y(d.value))
+            .attr("width", x.bandwidth())
+            .attr("height", d => height - y(d.value));
+    });
+    // d3.select('#standard-chart').selectAll('*').remove();
+    // if(chartType == 0){
+    //     console.log("I want to create a heatmap")
+    //     createHeatMap()
+    //     chartType = 1
+    // }
+    // else{
+    //     console.log("I want to create a histogram")
+    //     createHistogram()
+    //     chartType = 0
+    // }
+
 });
 
 function createHistogram(){

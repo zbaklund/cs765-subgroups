@@ -31,11 +31,13 @@ d3.json("../datasets/flare-2.json").then(function(data){
     const g = svg.append("g")
             .attr("transform", `translate(${width / 2}, ${width / 2})`);
 
+    var q_val = d3.select("#threshold").node().value;
+
     const path = g.append("g")
     .selectAll("path")
     .data(root.descendants().slice(1))
     .join("path")
-    .attr("fill", d => { while (d.depth > 1) d = d.parent; return color(d.data.name); })
+    .attr("fill", d => { while (d.depth > 1) d = d.parent; return d.value > q_val ? color(d.data.name) : "FF0000"; })
     .attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.6 : 0.4) : 0)
     .attr("d", d => arc(d.current));
 
@@ -66,13 +68,20 @@ d3.json("../datasets/flare-2.json").then(function(data){
     .on("click", clicked);
 
     function clicked(event, p) {
-    parent.datum(p.parent || root);
+        console.log(event)
+        console.log(p.data.name)
 
-    root.each(d => d.target = {
-    x0: Math.max(0, Math.min(1, (d.x0 - p.x0) / (p.x1 - p.x0))) * 2 * Math.PI,
-    x1: Math.max(0, Math.min(1, (d.x1 - p.x0) / (p.x1 - p.x0))) * 2 * Math.PI,
-    y0: Math.max(0, d.y0 - p.depth),
-    y1: Math.max(0, d.y1 - p.depth)
+        d3.select("#trail")
+            .append("li")
+            .text(p.data.name)
+
+        parent.datum(p.parent || root);
+
+        root.each(d => d.target = {
+        x0: Math.max(0, Math.min(1, (d.x0 - p.x0) / (p.x1 - p.x0))) * 2 * Math.PI,
+        x1: Math.max(0, Math.min(1, (d.x1 - p.x0) / (p.x1 - p.x0))) * 2 * Math.PI,
+        y0: Math.max(0, d.y0 - p.depth),
+        y1: Math.max(0, d.y1 - p.depth)
     });
 
     const t = g.transition().duration(750);
