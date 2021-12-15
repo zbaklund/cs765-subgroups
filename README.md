@@ -25,5 +25,7 @@ From there anytime you update the html file or the script file the changes will 
 
 
 ## Data Visualization Interactive Demo
+
 https://user-images.githubusercontent.com/22531969/146138393-8e34712c-e3a4-4241-ac8f-c8d16c6e0e12.mp4
+
 As you can see this is a powerful tool for sub-group analysis as it lets you pick and choose which subgroups and displays them nicely on the right hand-side
