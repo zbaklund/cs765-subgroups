@@ -59,7 +59,8 @@
           This is where they select the threshold
           <div>
             <input type="range" id="threshold" name="threshold" min="0" max="500000" value="100000" step="10000"
-              oninput="amount.value=threshold.value">
+              oninput="amount.value=threshold.value"
+              onchange="updateColor(threshold.value)">
 
             <output id="amount" name="amount" for="threshold">100000</output>
           </div>

@@ -18,25 +18,8 @@ d3.select('#chart-button')
     console.log(order_vals)
 
     d3.json("https://zbaklund.github.io/cs765-subgroups/datasets/flare-2.json").then(function(data){
-        // console.log(data)
-
-        // var explore = data.children;
-        // var sub_explore = [];
-        // var data_objs = [];
-        // explore.forEach(element => {
-        //     if (element.name == order_vals[0]){
-        //         sub_explore = element.children;
-        //         sub_explore.forEach(ele => {
-        //             if (ele.name == order_vals[1]){
-        //                 data_objs = ele.children;
-        //             }
-        //         });
-        //     }
-        // });
+    
         data_objs = search_tree(data, order_vals[order_vals.length - 1]);
-
-        console.log(data_objs);
-
         data_objs = fix_sub_sums(data_objs);
 
         console.log(data_objs);

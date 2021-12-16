@@ -25,6 +25,7 @@ d3.json("https://zbaklund.github.io/cs765-subgroups/datasets/flare-2.json").then
 
     const svg = d3.select("#sunburst")
             .append("svg")
+            .attr("id", "sunburst_chart")
             .attr("viewBox", [0, 0, width, width])
             .style("font", "10px sans-serif");
 
