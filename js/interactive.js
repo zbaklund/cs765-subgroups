@@ -1,4 +1,4 @@
-var datasets = ['ATUS','Used Cars'];
+var datasets = ['ATUS','NYC Jobs', 'Philippines Family Income and Expenses'];
 d3.select('#dataset-select').selectAll("option")
 .data(datasets)
 .enter()
@@ -9,24 +9,13 @@ d3.select('#dataset-select').selectAll("option")
 
 
 
-var dimensions = ["Age Group", "Region", "Gender", "Race"];
+var all_dimensions = [
+["Region", "Year", "Age", "Household Size", "Sex", "Race", "Education"],
+["Agency", "Posting Type", "Business Title", "Civil Service Title", "Job Category", "Full-Time/Part-Time", ""],
+["Region", "Main Source of Income", "Household Head Sex", "Household Head Age", "Household Head Marital Status", "Household Head Highest Grade Completed"]
+];
 
-d3.select("#dimension-checkboxes").selectAll("p")
-.data(dimensions)
-.enter()
-.append("div")
-.append("label")
-.append("input")
-    .attr("type", "checkbox")
-    .attr("id", function(d,i) { return 'dimension'+i; })
-    .attr("onClick", "magic(this)") //DO SOMETHING WITH THIS CHANGE FUNCTION
-    .attr("for", function(d,i) { return i; })
-    .attr("value", function(d,){return d;})
-
-d3.selectAll("label")
-.data(dimensions)
-.append("text")
-.text(function(d) { return d; });
+switchDimensions(0)
 
 function magic(dimension){
     // console.log(dimension.id,dimension.checked, dimension.value)
@@ -46,7 +35,6 @@ function magic(dimension){
 
 function switchDimensions(value){
     console.log(value);
-    var all_dimensions = [["Age Group", "Region", "Gender", "Race"],["Transmission", "Condition", "Engine"]];
 d3.select("#dimension-checkboxes").selectAll('div').remove()
 
 d3.select("#dimension-checkboxes").selectAll("p")
