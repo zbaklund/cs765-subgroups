@@ -72,6 +72,7 @@ d3.json("https://zbaklund.github.io/cs765-subgroups/datasets/flare-2.json").then
         console.log(event)
         console.log(p.data.name)
 
+        // update_breadcrumbs(p.data.name, p.parent);
         d3.select("#trail")
             .append("li")
             .text(p.data.name)
@@ -84,6 +85,7 @@ d3.json("https://zbaklund.github.io/cs765-subgroups/datasets/flare-2.json").then
         y0: Math.max(0, d.y0 - p.depth),
         y1: Math.max(0, d.y1 - p.depth)
     });
+
 
     const t = g.transition().duration(750);
 
@@ -131,7 +133,47 @@ partition_data = data => {
         .size([2 * Math.PI, root.height + 1])
         (root)
 };
+
+// function update_breadcrumbs(name, parent) {
+//     var order_vals = [];
+
+//     var values = d3.select("#trail")
+//         .selectAll("li")
+//     values.each(function (p,j) {
+//         // console.log("p: " + p, "j: " + j)
+//         var this_text = d3.select(this).text();
+//         // console.log(this_text)
+//         order_vals.push(this_text)
+//     });
+
+//     console.log(`current = ${name}, parent = ${parent}`);
+//     console.log("breadcrumbs...");
+//     console.log(order_vals);
+
+//     if(order_vals.indexOf(name) != -1){
+//         console.log("value already exists --remove")
+//         const idx = order_vals.indexOf(name);
+//         if (idx > -1){
+//             order_vals.splice(idx, 1);
+//         }
+//         //clear existing
+//         d3.select("#trail").html(null);
+
+//         repopulate_list(d3.select("#trail"), order_vals);
+//     }else {
+//         d3.select("#trail")
+//             .append("li")
+//             .text(name)
+//     }
+
     
+// }
+
+// function repopulate_list(selector, data){
+//     data.forEach(function(item) {
+//         selector.append("li").text(item);
+//     })
+// }
 
 // });
 
